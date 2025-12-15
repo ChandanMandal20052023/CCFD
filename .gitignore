@@ -1,0 +1,14 @@
+# dependencies
+node_modules/
+backend/node_modules/
+
+# environment files
+.env
+.env.*
+
+# firebase secrets
+serviceAccountKey.json
+firebaseAdminConfig.js
+
+# misc
+*.log

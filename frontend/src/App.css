@@ -1,0 +1,9 @@
+/* OR for scrollable container but hide scrollbar */
+.scrollable-hide-scrollbar {
+  overflow: auto;
+  scrollbar-width: none; /* for Firefox */
+}
+
+.scrollable-hide-scrollbar::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, Edge */
+}
