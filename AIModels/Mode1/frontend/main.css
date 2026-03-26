@@ -1,0 +1,85 @@
+/* --- DESIGN TOKENS --- */
+:root {
+    --primary: #2563eb;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --success: #16a34a;
+    --danger: #dc2626;
+}
+
+/* --- RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+/* --- LAYOUT --- */
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* --- CARD --- */
+.glass {
+    background: var(--card);
+    border-radius: 1rem;
+    border: 1px solid #e5e7eb;
+}
+
+.shadow {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* --- TEXT --- */
+.text-muted {
+    color: var(--muted);
+}
+
+/* --- BUTTON HOVER --- */
+button {
+    transition: background 0.2s ease;
+}
+
+/* --- STATUS --- */
+.status-safe {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.status-suspicious {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+/* --- TABLE --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td, th {
+    padding: 12px;
+}
+
+/* --- SIMPLE ANIMATION --- */
+.fade-in {
+    animation: fade 0.3s ease;
+}
+
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
