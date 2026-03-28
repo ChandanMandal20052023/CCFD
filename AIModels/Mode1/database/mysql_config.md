@@ -12,7 +12,6 @@ Run the following command in your virtual environment:
 ```bash
 pip install mysqlclient
 ```
-*Note: On Windows, you might need the [MySQL Client binary](https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysqlclient) if compilation fails.*
 
 ## 3. Update `backend/backend/settings.py`
 Replace the `DATABASES` section with:
@@ -36,6 +35,3 @@ After updating the settings, run the following commands:
 python manage.py makemigrations
 python manage.py migrate
 ```
-
-## 5. Manual Schema (Optional)
-If you need to create the tables manually, refer to `database/schema.sql`.
