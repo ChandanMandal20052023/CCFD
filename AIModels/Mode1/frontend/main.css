@@ -1,67 +1,63 @@
+/* =============================================================
+   CCFD — main.css  (Complete & Polished)
+   ============================================================= */
+
 /* --- DESIGN TOKENS --- */
 :root {
-    --primary: #2563eb;
-    --bg: #f8fafc;
-    --card: #ffffff;
-    --text: #0f172a;
-    --muted: #64748b;
-    --success: #16a34a;
-    --danger: #dc2626;
+    --primary:       #2563eb;
+    --primary-light: #3b82f6;
+    --primary-faint: #eff6ff;
+    --bg:            #f8fafc;
+    --card:          #ffffff;
+    --text:          #0f172a;
+    --muted:         #64748b;
+    --border:        #e2e8f0;
+    --success:       #16a34a;
+    --danger:        #dc2626;
+    --warning:       #d97706;
+    --shadow-sm:     0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md:     0 4px 16px rgba(0,0,0,0.08);
+    --radius:        0.875rem;
+    --transition:    0.18s ease;
 }
 
 /* --- RESET --- */
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* --- BASE --- */
 body {
-    font-family: 'Outfit', system-ui, sans-serif;
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.5;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* --- LAYOUT --- */
-.screen {
-    display: none;
-}
-
-.screen.active {
-    display: block;
-}
-
-/* --- CARD --- */
+/* --- GLASS CARD (auth modal) --- */
 .glass {
     background: var(--card);
-    border-radius: 1rem;
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-md);
 }
 
-.shadow {
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-}
-
-/* --- TEXT --- */
-.text-muted {
-    color: var(--muted);
-}
-
-/* --- BUTTON HOVER --- */
+/* --- BUTTONS --- */
 button {
-    transition: background 0.2s ease;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition),
+                box-shadow var(--transition), opacity var(--transition);
 }
-
-/* --- STATUS --- */
-.status-safe {
-    color: var(--success);
-    font-weight: 600;
+button:active {
+    transform: scale(0.97);
 }
-
-.status-suspicious {
-    color: var(--danger);
-    font-weight: 600;
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
 }
 
 /* --- TABLE --- */
@@ -69,17 +65,227 @@ table {
     width: 100%;
     border-collapse: collapse;
 }
-
+th {
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
 td, th {
-    padding: 12px;
+    padding: 12px 14px;
+    text-align: left;
+}
+tbody tr {
+    transition: background var(--transition);
 }
 
-/* --- SIMPLE ANIMATION --- */
+/* --- FRAUD ROW — pulsing red highlight --- */
+.fraud-row {
+    position: relative;
+    animation: fraudPulse 2.5s ease-in-out infinite;
+}
+@keyframes fraudPulse {
+    0%, 100% { background-color: rgba(254, 226, 226, 0.3); }
+    50%       { background-color: rgba(254, 202, 202, 0.55); }
+}
+
+/* --- NOTIFICATIONS / TOAST --- */
+#notification-container {
+    pointer-events: none;
+}
+#notification-container > div {
+    pointer-events: all;
+    min-width: 220px;
+    max-width: 340px;
+    border-radius: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.4;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+/* --- FADE-IN ANIMATION --- */
 .fade-in {
-    animation: fade 0.3s ease;
+    animation: fadeIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@keyframes fade {
-    from { opacity: 0; }
-    to { opacity: 1; }
+/* --- SLIDE UP (modals) --- */
+.slide-up {
+    animation: slideUp 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* --- STATUS BADGES --- */
+.status-safe {
+    color: var(--success);
+    font-weight: 600;
+}
+.status-suspicious {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+/* --- VERIFY OPTION BUTTONS --- */
+#verify-options button {
+    border: 2px solid #e2e8f0;
+    border-radius: 0.875rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #334155;
+    background: #fff;
+    width: 100%;
+    transition: border-color 0.15s, background 0.15s, color 0.15s, transform 0.1s;
+}
+#verify-options button:hover {
+    border-color: #3b82f6;
+    background: #eff6ff;
+    color: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59,130,246,0.15);
+}
+#verify-options button:active {
+    transform: scale(0.97);
+}
+#verify-options button.correct {
+    border-color: #16a34a !important;
+    background: #f0fdf4 !important;
+    color: #15803d !important;
+}
+#verify-options button.wrong {
+    border-color: #dc2626 !important;
+    background: #fef2f2 !important;
+    color: #b91c1c !important;
+    opacity: 0.7;
+}
+
+/* --- STAT CARDS hover glow --- */
+.stat-card {
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+.stat-card:hover {
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
+    transform: translateY(-2px);
+}
+
+/* --- SIDEBAR NAV TOOLTIP (title attribute, browser-native) --- */
+nav button {
+    position: relative;
+}
+
+/* --- PULSE DOT --- */
+#pulse-dot {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+    animation: pulseDot 2s infinite;
+}
+@keyframes pulseDot {
+    0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+    70%  { box-shadow: 0 0 0 7px rgba(34, 197, 94, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+/* --- UTILITY CLASSES (used in HTML, not auto-generated by Tailwind CDN) --- */
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 1.25rem;
+    overflow: hidden; /* Prevent charts from spilling out */
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    padding: 0.55rem 0.875rem;
+    border: 1px solid var(--border);
+    border-radius: 0.625rem;
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: var(--text);
+    background: #fff;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    display: block;
+}
+.input:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 0.625rem;
+    padding: 0.55rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+}
+.btn-primary:hover { background: var(--primary-light); }
+
+.btn-success {
+    background: var(--success);
+    color: #fff;
+    border: none;
+    border-radius: 0.625rem;
+    padding: 0.55rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+}
+.btn-success:hover { background: #15803d; }
+
+/* --- CHART CONTAINER — prevents canvas from overflowing the grid cell --- */
+.chart-wrap {
+    height: 280px;      /* fixed height so doughnut renders fully */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chart-wrap canvas {
+    max-height: 100% !important;
+    max-width: 100% !important;
+}
+
+/* --- OVERLAYS / MODALS --- */
+#registration-screen, 
+#payment-modal, 
+#verify-modal {
+    z-index: 1000;
+}
+
+/* --- SCROLLBAR (webkit) --- */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    main {
+        padding-left: 5.5rem !important;
+        padding-right: 1rem !important;
+    }
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 480px) {
+    nav {
+        width: 4rem;
+    }
+    main {
+        padding-left: 4.5rem !important;
+    }
 }

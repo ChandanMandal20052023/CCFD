@@ -25,7 +25,7 @@ class Transaction(models.Model):
         return f"{self.card_holder} - {self.amount} - {self.status}"
 
 
-class MLTrainingData(models.Model):
+class MLTrainingDataIndia(models.Model):
     transaction_id = models.AutoField(primary_key=True)
     user_id = models.IntegerField()
     card_number_last4 = models.CharField(max_length=4)
@@ -36,8 +36,7 @@ class MLTrainingData(models.Model):
     is_fraud = models.BooleanField()
 
     class Meta:
-        managed = False
-        db_table = 'ml_training_data'
+        db_table = 'ml_training_data_india'
 
 
 class LiveTransaction(models.Model):
