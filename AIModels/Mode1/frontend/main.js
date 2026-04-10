@@ -129,9 +129,8 @@ function logout() {
     renderAll();
 }
 
-// ============================================================
 // POLLING
-// ============================================================
+
 function startPolling() {
     stopPolling();
 
@@ -161,9 +160,8 @@ function stopPolling() {
     clearInterval(state.pollingTimer);
 }
 
-// ============================================================
 // DATA FETCH
-// ============================================================
+
 async function refreshData() {
     if (!state.user) {
         state.transactions = [];
@@ -196,9 +194,8 @@ async function refreshData() {
     renderAll();
 }
 
-// ============================================================
 // RENDER
-// ============================================================
+
 function renderAll() {
     updateStatsUI();
     updateUserUI();
@@ -223,9 +220,8 @@ function updateUserUI() {
     document.querySelectorAll('.user-name').forEach(el => el.innerText = name);
 }
 
-// ============================================================
 // TABLE
-// ============================================================
+
 function renderTable() {
     const tbody = document.getElementById('transaction-tbody');
     if (!tbody) return;
@@ -434,9 +430,8 @@ function showDashboard() {
     document.getElementById('registration-screen')?.classList.add('hidden');
 }
 
-// ============================================================
 // NOTIFY
-// ============================================================
+
 function notify(msg, type = 'info') {
     const colors = {
         success: 'bg-green-50 border-green-400 text-green-800',
@@ -455,9 +450,7 @@ function notify(msg, type = 'info') {
     setTimeout(() => el.remove(), 6000);
 }
 
-// ============================================================
 // MISSING HELPERS
-// ============================================================
 function toggleAuth(showRegister) {
     document.getElementById('login-form').classList.toggle('hidden', showRegister);
     document.getElementById('register-form').classList.toggle('hidden', !showRegister);
@@ -504,9 +497,8 @@ function cancelVerification() {
     document.getElementById('verify-modal').classList.add('hidden');
 }
 
-// ============================================================
 // VERIFICATION ENGINE — Added for Real-Time Security
-// ============================================================
+
 async function openVerifyModal(tx) {
     const modal = document.getElementById('verify-modal');
     const summary = document.getElementById('verify-tx-summary');
